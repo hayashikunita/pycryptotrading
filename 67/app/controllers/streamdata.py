@@ -6,6 +6,8 @@ from bitflyer.bitflyer import Ticker
 from threading import Lock
 from threading import Thread
 
+import dateutil.parser
+from datetime import datetime
 from app.controllers.ai import AI
 import constants
 import settings
@@ -26,7 +28,7 @@ import websocket
 def on_message(ws, message):
     r = json.loads(message)['params']['message']
     product_code =r['product_code']
-    timestamp=time.time()
+    timestamp = datetime.timestamp(dateutil.parser.parse(r['timestamp']))
     ask=r['best_ask']
     bid=r['best_bid']
     volume = r['volume']
