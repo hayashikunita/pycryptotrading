@@ -87,6 +87,8 @@ class APIClient(object):
 
     def get_balance(self) -> Balance:
 
+        # bitflyer = APIClient(self.apiKey, self.secret)
+        # これを加えて、bitflyer.apiKey = self.apiKey、bitflyer.secret= self.secretを消すことで重複した記述を消す
         bitflyer = ccxt.bitflyer()
         bitflyer.apiKey = self.apiKey
         bitflyer.secret = self.secret
@@ -97,6 +99,9 @@ class APIClient(object):
         return Balance(available, collateral)
 
     def send_order(self, symbol, type, side, amount, price, params):
+
+        # bitflyer = APIClient(self.apiKey, self.secret)
+        # これを加えて、bitflyer.apiKey = self.apiKey、bitflyer.secret= self.secretを消すことで重複した記述を消す
         bitflyer = ccxt.bitflyer()
         bitflyer.apiKey = self.apiKey
         bitflyer.secret=  self.secret
@@ -126,6 +131,9 @@ class APIClient(object):
         # アルゴリズムにする際、適切な例外処理ではなかった為、一旦コメントアウト
 
     def fetch_open_order(self):
+
+        # bitflyer = APIClient(self.apiKey, self.secret)
+        # これを加えて、bitflyer.apiKey = self.apiKey、bitflyer.secret= self.secretを消すことで重複した記述を消す
         bitflyer = ccxt.bitflyer()
         bitflyer.apiKey = self.apiKey
         bitflyer.secret=  self.secret
@@ -157,6 +165,9 @@ class APIClient(object):
         # 例外処理で途中まで考えた関数、今後例外処理で使えるかもしれないのでいったんコメントアウト
 
     def cancel_new_order(self):
+
+        # bitflyer = APIClient(self.apiKey, self.secret)
+        # これを加えて、bitflyer.apiKey = self.apiKey、bitflyer.secret= self.secretを消すことで重複した記述を消す
         bitflyer = ccxt.bitflyer()
         bitflyer.apiKey = settings.apiKey
         bitflyer.secret=  settings.secret
@@ -173,6 +184,9 @@ class APIClient(object):
         )
 
     def fetch_all_orders(self):
+
+        # bitflyer = APIClient(self.apiKey, self.secret)
+        # これを加えて、bitflyer.apiKey = self.apiKey、bitflyer.secret= self.secretを消すことで重複した記述を消す
         bitflyer = ccxt.bitflyer()
         bitflyer.apiKey = self.apiKey
         bitflyer.secret=  self.secret
@@ -183,6 +197,9 @@ class APIClient(object):
         return orders
 
     def fetch_all_trades(self):
+
+        # bitflyer = APIClient(self.apiKey, self.secret)
+        # これを加えて、bitflyer.apiKey = self.apiKey、bitflyer.secret= self.secretを消すことで重複した記述を消す
         bitflyer = ccxt.bitflyer()
         bitflyer.apiKey = self.apiKey
         bitflyer.secret=  self.secret
@@ -193,6 +210,9 @@ class APIClient(object):
         return trades
 
     def fetch_trades_summary(self) -> TradesSummary:
+
+        # bitflyer = APIClient(self.apiKey, self.secret)
+        # これを加えて、bitflyer.apiKey = self.apiKey、bitflyer.secret= self.secretを消すことで重複した記述を消す
         bitflyer = ccxt.bitflyer()
         bitflyer.apiKey = self.apiKey
         bitflyer.secret=  self.secret
@@ -210,6 +230,9 @@ class APIClient(object):
                 print(tradedata.side, tradedata.amount, tradedata.price, tradedata.id )
 
     def fetch_orders_summary(self) -> OrdersSummary:
+
+        # bitflyer = APIClient(self.apiKey, self.secret)
+        # これを加えて、bitflyer.apiKey = self.apiKey、bitflyer.secret= self.secretを消すことで重複した記述を消す
         bitflyer = ccxt.bitflyer()
         bitflyer.apiKey = self.apiKey
         bitflyer.secret=  self.secret

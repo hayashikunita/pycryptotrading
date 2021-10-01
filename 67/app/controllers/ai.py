@@ -37,7 +37,7 @@ class AI(object):
         if back_test:
             self.signal_events = SignalEvents()
         else:
-            self.signal_events = SignalEvents.get_signal_events_by_count(1)
+            self.signal_events = SignalEvents()
 
         # pyfxtradingの場合
         # if back_test:
@@ -82,7 +82,7 @@ class AI(object):
             #     return False
             # pyfxtradingの場合
 
-            print("back_test is true")
+            print("back_test could_buy runs")
             could_buy = self.signal_events.buy(self.product_code, candle.time, candle.close, amount=1, save= True)
             return could_buy
 
@@ -129,10 +129,10 @@ class AI(object):
             # pyfxtradingの場合
 
             bitflyer.send_order(symbol, type, side, amount, price, params)
-            print("buy_event")
+            print("buy_event runs")
 
             could_buy = self.signal_events.buy(self.product_code, candle.time, candle.close, amount=1, save=True)
-            print("could_buy")
+            print("could_buy runs")
             return could_buy
 
     def sell(self, candle):
@@ -147,7 +147,7 @@ class AI(object):
             #     return False
             # pyfxtradingの場合
 
-            print("back_test is true")
+            print("back_test could_sell runs")
             could_sell = self.signal_events.sell(self.product_code, candle.time, candle.close, amount=1, save=True)
             return could_sell
 
@@ -192,14 +192,14 @@ class AI(object):
             params = order_data.params
 
             bitflyer.send_order(symbol, type, side, amount, price, params)
-            print("sell_event")
+            print("sell_event runs")
 
             could_sell = self.signal_events.sell(self.product_code, candle.time, candle.close, amount=1, save=True)
-            print("could_sell")
+            print("could_sell runs")
             return could_sell
 
     def trade(self):
-        print("dddddd")
+        print("trade() runs")
         logger.info('action=trade status=run')
         params = self.optimized_trade_params
         if params is None:
@@ -282,3 +282,48 @@ class AI(object):
 
                 self.stop_limit = 0.0
                 self.update_optimize_params(is_continue=True)
+
+
+    # ゴールデンクロス発生の場合のみのtrade関数、下記
+
+    # def trade(self):
+
+    #     logger.info('action=trade status=run')
+        # params = self.optimized_trade_params
+        # if params is None:
+        #     return
+
+        # df = DataFrameCandle(self.product_code, self.duration)
+        # df.set_all_candles(self.past_period)
+
+        # これだとネットで流れている形に変更できる
+        # df1 = df['candles']
+        # これだとネットで流れている形に変更できる
+
+        # ema_values_1 = talib.EMA(np.array(df.closes), timeperiod=5)
+        # ema_values_2 = talib.EMA(np.array(df.closes), timeperiod=10)
+
+        # for i in range(1, len(df.candles)):
+        #     buy_point, sell_point = 0, 0
+
+            # if params.ema_enable and params.ema_period_1 <= i and params.ema_period_2 <= i:
+            # if ema_values_1[i - 1] < ema_values_2[i - 1] and ema_values_1[i] >= ema_values_2[i]:
+            #     buy_point += 1
+
+            # if ema_values_1[i - 1] > ema_values_2[i - 1] and ema_values_1[i] <= ema_values_2[i]:
+            #     sell_point += 1
+
+            # if buy_point > 0:
+            #     if not self.buy(df.candles[i]):
+            #         continue
+
+            #     self.stop_limit = df.candles[i].close * self.stop_limit_percent
+
+            # if sell_point > 0 or self.stop_limit > df.candles[i].close:
+            #     if not self.sell(df.candles[i]):
+            #         continue
+
+            #     self.stop_limit = 0.0
+                # self.update_optimize_params(is_continue=True)
+
+    # ゴールデンクロス発生の場合のみのtrade関数、上記
